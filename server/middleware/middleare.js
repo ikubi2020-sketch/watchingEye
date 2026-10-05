@@ -3,11 +3,11 @@ import zod, { number, string } from "zod"
 export const alertScheme = zod.object({
     "displayName" :  zod.string({message : "displayName must be string"}).min(1, "can not get an empty string"),
     "description"  : zod.string({message : "description must be string"}).min(1, "can not get an empty string"),
-    "priority" : zod.enum(["critical", "high", "medium", "low"], {message : "status must be a designated string"}),
-    "arena" : zod.enum(["north", "south", "center"], {message : "arena must be a designated string"}),
-    "status" : zod.enum(["active", "handled"], {message : "status must be a designated string"}),
-    "lon" : zod.number({message : "lon must be number"}),
-    "lat" :  zod.number({message : "lon must be number"})
+    "priority" : zod.enum(["Critical", "High", "Medium", "Low"], "priority must be a designated string"),
+    "arena" : zod.enum(["North", "South", "Center"], "arena must be a designated string"),
+    "status" : zod.enum(["Active", "Handled"], "status must be a designated string"),
+    "lon" : zod.coerce.number({message : "lon must be number"}),
+    "lat" :  zod.coerce.number({message : "lat must be number"})
 })
 
 export function validEdit(req, res, next) {

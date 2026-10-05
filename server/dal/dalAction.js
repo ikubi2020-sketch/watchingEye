@@ -6,7 +6,7 @@ const alertConnection = dbAccede.collection("alert_connection")
 
 export async function findByIdDal(id) {
     const result = await alertConnection.findOne({_id : new ObjectId(id)})
-    return result
+    return [result]
 }
 
 export async function getAllAlarmsDal() {
