@@ -10,10 +10,10 @@ export const alertScheme = zod.object({
     "lat" :  zod.number({message : "lon must be number"})
 })
 
-
 export function zodValidation(schema) {
     return (req, res, next) => {
         const result = schema.safeParse(req.body)
+        // zod return 400 for bad request
         if(!result.success) {return res.status(400).json({message : result.error.issues[0].message})} 
         next()
     }

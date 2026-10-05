@@ -4,6 +4,7 @@ import {createError} from "../utils/utils.js"
 export async function getAllAlertsServ() {
     try {
         const result = await getAllAlarmsDal()
+        // if it wasn't return then the problem is in their server (probably)
         if(!result) {throw createError(500 , "something went wrong")}
         return result
     } catch (error) {
@@ -15,7 +16,7 @@ export async function getAllAlertsServ() {
 export async function getAlarmByIdServ(id) {
     try {
         const result = await findByIdDal(id)
-        console.log(result)
+        //404 for if it was not found
         if(!result) {throw createError(404 , "alarm not found")}
         return result
     } catch (error) {
@@ -35,7 +36,7 @@ export async function addAlarmServ(newAlarm) {
 export async function DeleteAlarmServ(id) {
     try {
         const result = await deleteByIdDal(id)
-        console.log(result);
+        // if it wasn't return then the problem is in their server (probably)
         if(!result.deletedCount) {throw createError(404 , "alarm not deleted")}
         return result
     } catch (error) {
