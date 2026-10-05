@@ -1,4 +1,4 @@
-import {addAlarmServ, getAllAlertsServ} from "../service/alertServ.js"
+import {addAlarmServ, getAllAlertsServ, getAlarmByIdServ} from "../service/alertServ.js"
 
 
 // router.get("/alert", ()=>{})
@@ -24,9 +24,9 @@ export async function getAllAlertsCtrl(req, res , next) {
 
 export async function getAlarmByIdCtrl(req, res , next) {
     const {id} = res.params
-    
+    console.log(id)
     try {
-        const result = {}
+        const result = await getAlarmByIdServ(id)
         return res.status(200).json({message : result})
     } catch (error) {
         next(error)
@@ -44,9 +44,10 @@ export async function addAlarmCtrl(req, res , next) {
         next(error)
     }
 }
-export async function name4(req, res , next) {
+export async function DeleteAlarmCtrl(req, res , next) {
+    
     try {
-        const result = {}
+        const result = await DeleteAlarmServ()
         return res.status(200).json({message : result})
     } catch (error) {
         next(error)

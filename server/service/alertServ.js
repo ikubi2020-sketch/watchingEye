@@ -12,9 +12,10 @@ export async function getAllAlertsServ() {
 }
 
 
-export async function name4(data) {
+export async function getAlarmByIdServ(id) {
     try {
-        const result = await {}
+        const result = await findByIdDal(id)
+        if(!result) {throw createError(404 , "alarm not found")}
         return result
     } catch (error) {
         throw error

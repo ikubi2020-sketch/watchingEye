@@ -1,4 +1,3 @@
-import { error } from "node:console"
 import zod from "zod"
 
 export const alertScheme = zod.object({
@@ -14,7 +13,8 @@ export const alertScheme = zod.object({
 
 export function zodValidation(schema) {
     return (req, res, next) => {
-        const result = schema.safeParas(req.body)
+        const result = schema.safeParse(req.body)
+        console.log(result)
         if(!result.succeed) {return res.status(400).json({message : result.error.issue[0].message})} 
         next()
     }
