@@ -15,7 +15,7 @@
 
 async function name(req, res , next) {
     try {
-        const result = {}
+        const result =  {}
         return result.status(200).json({message : result})
     } catch (error) {
         next(error)
