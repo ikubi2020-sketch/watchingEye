@@ -1,17 +1,16 @@
-import zod, { string } from "zod"
+import zod, { number, string } from "zod"
 
 export const alertScheme = zod.object({
     "displayName" :  zod.string({message : "displayName must be string"}).min(1, "can not get an empty string"),
     "description"  : zod.string({message : "description must be string"}).min(1, "can not get an empty string"),
-    "priority" : zod.string({message : "priority must be string"}).min(1, "can not get an empty string"),
-    "arena" : zod.enum(["critical", "high", "medium", "low"], {message : "arena must be a designated string"}),
-    "status" : zod.enum(["north", "south", "center"], {message : "status must be a designated string"}),
+    "priority" : zod.enum(["critical", "high", "medium", "low"], {message : "status must be a designated string"}),
+    "arena" : zod.enum(["north", "south", "center"], {message : "arena must be a designated string"}),
+    "status" : zod.enum(["active", "handled"], {message : "status must be a designated string"}),
     "lon" : zod.number({message : "lon must be number"}),
     "lat" :  zod.number({message : "lon must be number"})
 })
 
-
-export async function validEdit(req, res, next) {
+export function validEdit(req, res, next) {
     const cleanEditDetails = {}
     const editDetails = req.body
     if(editDetails.displayName){
@@ -26,11 +25,15 @@ export async function validEdit(req, res, next) {
         if(typeof(editDetails.priority) !== string ||editDetails.priority.length < 1 )
         return res.status(400).json({message : "priority is not valid"})
         cleanEditDetails.priority =  editDetails.priority}
-    if(editDetails.arena){
-        if(typeof(editDetails.arena) !== string || !["critical", "high", "medium", "low"] === editDetails.priority)
-        return res.status(400).json({message : "priority is not valid"})
-        cleanEditDetails.arena =  editDetails.arena}
-    req.body = editDetails
+    if(editDetails.lon){
+        if(typeof(editDetails.lon) !== number ||editDetails.lon.length < 1 )
+        return res.status(400).json({message : "lon is not valid"})
+        cleanEditDetails.lon =  editDetails.lon}
+    if(editDetails.lat){
+        if(typeof(editDetails.lat) !== number ||editDetails.lat.length < 1 )
+        return res.status(400).json({message : "lat is not valid"})
+        cleanEditDetails.lat =  editDetails.lat}
+    // req.body = editDetails
     next()
 }
 
