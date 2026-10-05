@@ -4,7 +4,7 @@ export async function globalAxios(method : string, path : string, params : {}, h
     try {
         const response  = await axios({
             method,
-            url : "http://localhost:3001/api/alerts" + path,
+            url : "http://localhost:3001/api/alerts/" + path,
             params : params,
             headers : headers,
             data : body

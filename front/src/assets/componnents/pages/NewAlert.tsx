@@ -1,5 +1,6 @@
 import { globalAxios } from "../../utils/utiles"
 import { useNavigate } from "react-router"
+import "./newalert.css"
 
 export default function NewAlert() {
   const navigate = useNavigate()
@@ -9,8 +10,8 @@ export default function NewAlert() {
     priority : "",
     arena : "",
     status : "",
-    lon : 0,
-    lat : 0
+    lon : "",
+    lat : ""
   }
   async function handelButton() {
     const {data, error} = await globalAxios("post", "", {}, {},newAlert)
@@ -21,17 +22,39 @@ export default function NewAlert() {
   }
   
   return (
-    <div>
-      <div>
-        <input onChange={(e) => newAlert.displayName = e.target.value} type="text" placeholder="displayName"/>
-        <input onChange={(e) => newAlert.description = e.target.value} type="text" placeholder="description of alert"/>
-        <input onChange={(e) => newAlert.priority = e.target.value} type="text" placeholder="priority of alert"/>
-        <input onChange={(e) => newAlert.arena = e.target.value} type="text" placeholder="arena of alert"/>
-        <input onChange={(e) => newAlert.status = e.target.value} type="text" placeholder="status of alert"/>
-        <input onChange={(e) => newAlert.lon = e.target.value} type="number" placeholder="enter longitude"/>
-        <input onChange={(e) => newAlert.lat = e.target.value} type="number" placeholder="enter latitude of"/>
+    <div className="newPageMain">
+      <h1>add a new alert</h1>
+      <h3>to add an alert please fill app all the fields below</h3>
+      <div className="mainFormOfNew">
+        <input className="fieldNewForm"
+         onChange={(e) => newAlert.displayName = e.target.value}
+          type="text" placeholder="displayName"/>
+
+        <input className="fieldNewForm"
+         onChange={(e) => newAlert.description = e.target.value}
+          type="text" placeholder="description of alert"/>
+
+        <input className="fieldNewForm"
+         onChange={(e) => newAlert.priority = e.target.value}
+          type="text" placeholder="priority of alert"/>
+
+        <input className="fieldNewForm"
+         onChange={(e) => newAlert.arena = e.target.value}
+          type="text" placeholder="arena of alert"/>
+
+        <input className="fieldNewForm"
+         onChange={(e) => newAlert.status = e.target.value}
+          type="text" placeholder="status of alert"/>
+
+        <input className="fieldNewForm"
+         onChange={(e) => newAlert.lon = e.target.value}
+         type="text" placeholder="enter longitude"/>
+
+        <input className="fieldNewForm"
+         onChange={(e) => newAlert.lat = e.target.value}
+          type="=text" placeholder="enter latitude of"/>
       </div>
-      <button onClick={handelButton}>send details</button>
+      <button className="newButton" onClick={handelButton}>send details</button>
     </div>
   )
 }

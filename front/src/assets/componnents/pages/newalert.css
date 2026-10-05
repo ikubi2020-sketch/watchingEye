@@ -1,0 +1,24 @@
+.newPageMain{
+    margin-top: 5%;
+    background-color: gray;
+    height: 85vh;
+}
+h3{
+    color: black;
+}
+.mainFormOfNew{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 5%;
+}
+.fieldNewForm{
+    padding: 10px;
+    margin: 30px;
+    border: solid 2px black;
+    border-radius: 20px;
+}
+.newButton{
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(58, 157, 58);
+}
