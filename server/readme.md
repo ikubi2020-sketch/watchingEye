@@ -24,6 +24,8 @@ notice . the reason fro status code will be explain in the code with a note
 
 notice . in every layer except for middleware the function name will end with the name of the layer to make it easy to infract and locate it 
 
+( I wrote alarm sometimes instead of alert so pleas ignore it )
+
 the program run on 5 endpoints 
 
 get("/alerts") to get all alert 

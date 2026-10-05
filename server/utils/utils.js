@@ -19,3 +19,9 @@ export function errorHandler(err, req, res, next) {
     else res.status(500).json({message : "something went wrong"})
 }
 
+export function addIdToListOfAlerts(listOfAlerts) {
+    const newAlertList = listOfAlerts.map((alert)=> {
+        alert.id = alert._id
+        return alert})
+    return newAlertList
+}

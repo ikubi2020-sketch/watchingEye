@@ -1,12 +1,13 @@
 import {findByIdDal,getAllAlarmsDal, insertAnAlarmDal, deleteByIdDal, editByIdDal} from "../dal/dalAction.js"
-import {createError} from "../utils/utils.js"
+import {createError, addIdToListOfAlerts} from "../utils/utils.js"
 
 export async function getAllAlertsServ() {
     try {
         const result = await getAllAlarmsDal()
         // if it wasn't return then the problem is in their server (probably)
-        if(!result) {throw createError(500 , "something went wrong")}
-        return result
+        if(!result) {throw createError(500 , "something went wrong")}       
+        const newResult = addIdToListOfAlerts(result)
+        return newResult
     } catch (error) {
         throw error
     }
@@ -27,6 +28,7 @@ export async function getAlarmByIdServ(id) {
 export async function addAlarmServ(newAlarm) {
     try {
         const result = await insertAnAlarmDal(newAlarm)
+        result.id = result._id
         return result
     } catch (error) {
         throw error
@@ -37,7 +39,7 @@ export async function DeleteAlarmServ(id) {
     try {
         const result = await deleteByIdDal(id)
         // if it wasn't return then the problem is in their server (probably)
-        if(!result.deletedCount) {throw createError(404 , "alarm not deleted")}
+        if(!result.deletedCount) {throw createError(500 , "alarm not deleted")}
         return result
     } catch (error) {
         throw error
@@ -47,6 +49,7 @@ export async function DeleteAlarmServ(id) {
 export async function editAlarmServ(id, data) {
     try {
         const result = await editByIdDal(id, data)
+        result.id = result._id
         return result
     } catch (error) {
         throw error
