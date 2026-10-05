@@ -1,6 +1,4 @@
-import { log } from "console"
 import {MongoClient} from "mongodb"
-import { cli } from "winston/lib/winston/config"
 
 const client = new MongoClient(process.env.MONGO_URL)
 

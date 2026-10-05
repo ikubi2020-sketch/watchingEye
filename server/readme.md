@@ -17,6 +17,7 @@ it manege their location and level of criticality and more
 
 the program run on 5v endpoints 
 
+notice . in every layer except fro middleware the function name will end with the name of the layer to make it ease to ineract and locate it 
 
 get("/alert") to get all alarms 
 

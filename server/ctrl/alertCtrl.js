@@ -1,4 +1,4 @@
-
+import {addAlarmServ, getAllAlertsServ} from "../service/alertServ.js"
 
 
 // router.get("/alert", ()=>{})
@@ -13,43 +13,49 @@
 
 
 
-async function name(req, res , next) {
+export async function getAllAlertsCtrl(req, res , next) {
     try {
-        const result =  {}
-        return result.status(200).json({message : result})
+        const result =  await getAllAlertsServ()
+        return res.status(200).json({message : result})
     } catch (error) {
         next(error)
     }
 }
 
-async function name2(req, res , next) {
+export async function getAlarmByIdCtrl(req, res , next) {
+    const {id} = res.params
+    
     try {
         const result = {}
-        return result.status(200).json({message : result})
+        return res.status(200).json({message : result})
     } catch (error) {
         next(error)
     }
 }
-async function name3(req, res , next) {
+
+export async function addAlarmCtrl(req, res , next) {
+    console.log("point 1")
+    const newAlarm = req.body
+    console.log(newAlarm)
     try {
-        const result = {}
-        return result.status(200).json({message : result})
+        const result = await addAlarmServ(newAlarm)
+        return res.status(201).json({message : "alarm added successfully"})
     } catch (error) {
         next(error)
     }
 }
-async function name4(req, res , next) {
+export async function name4(req, res , next) {
     try {
         const result = {}
-        return result.status(200).json({message : result})
+        return res.status(200).json({message : result})
     } catch (error) {
         next(error)
     }
 }
-async function name5(req, res , next) {
+export async function name5(req, res , next) {
     try {
         const result = {}
-        return result.status(200).json({message : result})
+        return res.status(200).json({message : result})
     } catch (error) {
         next(error)
     }
