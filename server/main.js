@@ -1,0 +1,18 @@
+import express from "express"
+import dotenv from "dotenv/config"
+import helmet from "helmet"
+import router from "./routes/routes.js"
+
+const port = process.env.PORT || 3001
+
+const app = express()
+
+app.use(express.json())
+
+app.use(helmet())
+
+app.use("/", router)
+
+app.listen(port , ()=>{
+    console.log(`server running on port ${port}`)
+})
