@@ -24,6 +24,11 @@ export async function deleteByIdDal(id) {
     return result
 }
 
+export async function editByIdDal(id, data) {
+    const result = await alertConnection.updateOne({_id : new ObjectId(id)}, {$set : data})
+    return result
+}
+
 
 
 

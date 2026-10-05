@@ -1,4 +1,4 @@
-import {findByIdDal,getAllAlarmsDal, insertAnAlarmDal, deleteByIdDal} from "../dal/dalAction.js"
+import {findByIdDal,getAllAlarmsDal, insertAnAlarmDal, deleteByIdDal, editByIdDal} from "../dal/dalAction.js"
 import {createError} from "../utils/utils.js"
 
 export async function getAllAlertsServ() {
@@ -44,9 +44,9 @@ export async function DeleteAlarmServ(id) {
     }
 }
 
-export async function name1(data) {
+export async function editAlarmServ(id, data) {
     try {
-        const result = await {}
+        const result = await editByIdDal(id, data)
         return result
     } catch (error) {
         throw error
