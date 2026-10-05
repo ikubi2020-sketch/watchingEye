@@ -2,6 +2,7 @@ import express from "express"
 import dotenv from "dotenv/config"
 import helmet from "helmet"
 import router from "./routes/routes.js"
+import cors from "cors"
 import  {loggerServer, errorHandler} from "./utils/utils.js"
 
 const port = process.env.PORT || 3001
@@ -13,6 +14,8 @@ app.use(loggerServer)
 app.use(express.json())
 
 app.use(helmet())
+
+app.use(cors())
 
 app.use("/api", router)
 

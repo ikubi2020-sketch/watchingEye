@@ -4,7 +4,7 @@ workdir
 
 copy package*.json
 
-
+run nmp install
 
 copy . /.
 

@@ -1,19 +1,19 @@
 import express from "express"
 import {addAlarmCtrl, getAllAlertsCtrl, getAlarmByIdCtrl, DeleteAlarmCtrl, editAlarmCtrl} from "../ctrl/alertCtrl.js"
-// import {alertScheme, zodValidation } from "../middleware/middleare.js"
+import {alertScheme, zodValidation } from "../middleware/middleare.js"
 
 const router = express.Router()
 
 
-router.get("/alert", getAllAlertsCtrl)
+router.get("/alerts", getAllAlertsCtrl)
 
-router.get("/alert/:id", getAlarmByIdCtrl)
+router.get("/alerts/:id", getAlarmByIdCtrl)
 
-router.post("/alert", addAlarmCtrl)
+router.post("/alerts",zodValidation(alertScheme), addAlarmCtrl)
 
-router.delete("/alert/:id", DeleteAlarmCtrl)
+router.delete("/alerts/:id", DeleteAlarmCtrl)
 
-router.put("/alert/:id", editAlarmCtrl)
+router.put("/alerts/:id", editAlarmCtrl)
 
 
 export default router

@@ -6,16 +6,15 @@ export const alertScheme = zod.object({
     "priority" : zod.string({message : "priority must be string"}),
     "arena" : zod.string({message : "arena must be string"}),
     "status" : zod.string({message : "status must be string"}),
-    "lon" : zod.number({message : "lon must be string"}),
-    "lat" :  zod.number({message : "lon must be string"})
+    "lon" : zod.number({message : "lon must be number"}),
+    "lat" :  zod.number({message : "lon must be number"})
 })
 
 
 export function zodValidation(schema) {
     return (req, res, next) => {
         const result = schema.safeParse(req.body)
-        console.log(result)
-        if(!result.succeed) {return res.status(400).json({message : result.error.issue[0].message})} 
+        if(!result.success) {return res.status(400).json({message : result.error.issues[0].message})} 
         next()
     }
 }

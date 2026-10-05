@@ -26,7 +26,6 @@ export async function getAlarmByIdServ(id) {
 export async function addAlarmServ(newAlarm) {
     try {
         const result = await insertAnAlarmDal(newAlarm)
-        console.log(result)
         return result
     } catch (error) {
         throw error

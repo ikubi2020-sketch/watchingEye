@@ -16,7 +16,8 @@ export async function getAllAlarmsDal() {
 
 export async function insertAnAlarmDal(newAlarm){
     const result = await alertConnection.insertOne(newAlarm)
-    return result
+    const addedAlert =await findByIdDal(result.insertedId)
+    return addedAlert
 }
 
 export async function deleteByIdDal(id) {
