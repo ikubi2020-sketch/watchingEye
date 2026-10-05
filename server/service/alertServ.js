@@ -1,4 +1,4 @@
-import {findByIdDal,getAllAlarmsDal, insertAnAlarmDal} from "../dal/dalAction.js"
+import {findByIdDal,getAllAlarmsDal, insertAnAlarmDal, deleteByIdDal} from "../dal/dalAction.js"
 import {createError} from "../utils/utils.js"
 
 export async function getAllAlertsServ() {
@@ -15,6 +15,7 @@ export async function getAllAlertsServ() {
 export async function getAlarmByIdServ(id) {
     try {
         const result = await findByIdDal(id)
+        console.log(result)
         if(!result) {throw createError(404 , "alarm not found")}
         return result
     } catch (error) {
@@ -25,16 +26,18 @@ export async function getAlarmByIdServ(id) {
 export async function addAlarmServ(newAlarm) {
     try {
         const result = await insertAnAlarmDal(newAlarm)
-        if(!result) {throw createError(500 , "alarm not added")}
+        console.log(result)
         return result
     } catch (error) {
         throw error
     }
 }
 
-export async function name2(data) {
+export async function DeleteAlarmServ(id) {
     try {
-        const result = await {}
+        const result = await deleteByIdDal(id)
+        console.log(result);
+        if(!result.deletedCount) {throw createError(404 , "alarm not deleted")}
         return result
     } catch (error) {
         throw error

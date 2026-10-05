@@ -19,6 +19,11 @@ export async function insertAnAlarmDal(newAlarm){
     return result
 }
 
+export async function deleteByIdDal(id) {
+    const result = await alertConnection.deleteOne({_id : new ObjectId(id)})
+    return result
+}
+
 
 
 
