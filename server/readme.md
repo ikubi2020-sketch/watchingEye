@@ -50,7 +50,7 @@ router.post("auth/createadmin") create a new admin , use in start of program
 
 router.post("auth/register") reacquire authorize admin after login , register a new user   
 
-router.post("auth/login") log in to the system
+router.post("auth/login") log in to the system , expect for id and password
 
 router.get("auth/me" ) reacquire authorize user after login, return hes full details
 

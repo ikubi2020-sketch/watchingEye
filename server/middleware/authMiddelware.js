@@ -1,9 +1,9 @@
-import {comparePassword, createHash, createToken, verifyToken} from "./authTools.js"
+import {comparePassword, createHash, verifyToken} from "./authTools.js"
 import {getUser} from "../dal/usersDbActions.js"
 import { createError } from "../utils/utils.js"
 
 
-export async function newUserMiddleware(req, res , next) {
+export function newUserMiddleware(req, res , next) {
     const newUser = req.body
     const adminAuth = req.headers.authorization
     // 400 for bad request
@@ -32,7 +32,7 @@ export async function loginMiddleware(req, res , next) {
     next()
 }
 
-export async function verifyAdminMiddleware(req, res , next) {
+export function verifyAdminMiddleware(req, res , next) {
     const adminAuth = req.headers.authorization
     // 400 for bad request
     if(!adminAuth) { throw createError(400,  "missing headers")}
@@ -40,5 +40,17 @@ export async function verifyAdminMiddleware(req, res , next) {
     const verifyAdmin = verifyToken(adminToken)
     // 400 for bad request
     if(!verifyAdmin){ throw createError(400, "missing headers")}
+    next()
+}
+
+export function validUser() {
+    const userAuth = req.headers.authorization
+    // 400 for bad request
+    if(!userAuth) { throw createError(400,  "missing headers")}
+    const userToken = userAuth.split("Bearer ")[1]
+    const verifyUser = verifyToken(userToken)
+    if(!verifyUser){ throw createError(400, "missing headers")}
+    console.log(verifyUser)
+    req.body = verifyUser
     next()
 }

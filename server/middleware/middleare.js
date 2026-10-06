@@ -48,3 +48,9 @@ export function zodValidation(schema) {
     }
 }
 
+
+export const loginSchema = zod.object({
+    "id" :  zod.coerce.number({message : "id must be number"}).min(1, "id can not get less then 1"),
+    "password" :  zod.coerce.number({message : "password must be number"}).min(1, "can not get an empty string")
+})
+
