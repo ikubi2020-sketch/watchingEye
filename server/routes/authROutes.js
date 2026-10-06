@@ -1,6 +1,6 @@
 import express from "express"
 import {addNewUserCtrl, deleteUserCtrl, getAllUsersCtrl, getCurrentUserCtrl, loginCtrl, createadminCtrl} from "../ctrl/authCtrl.js"
-import {newUserMiddleware, loginMiddleware, verifyAdminMiddleware} from "../middleware/authMiddelware.js"
+import {newUserMiddleware, loginMiddleware, verifyAdminMiddleware ,validUser, generaValidUser} from "../middleware/authMiddelware.js"
 import {zodValidation, loginSchema, newUserSchema} from "../middleware/middleare.js"
 
 const router = express.Router()
@@ -11,9 +11,9 @@ router.post("/register",zodValidation(newUserSchema) ,newUserMiddleware, addNewU
 
 router.post("/login", zodValidation(loginSchema) ,loginMiddleware, loginCtrl)
 
-router.get("/me" , getCurrentUserCtrl)
+router.get("/me" ,validUser , getCurrentUserCtrl)
 
-router.get("/users" ,verifyAdminMiddleware, getAllUsersCtrl)
+router.get("/users" ,generaValidUser, getAllUsersCtrl)
 
 router.delete("/users/:id" ,verifyAdminMiddleware, deleteUserCtrl)
 
