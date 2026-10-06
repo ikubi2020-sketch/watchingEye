@@ -8,9 +8,8 @@ export async function addNewUser(user) {
     return result
 }
 
-
 export async function deleteUser(id) {
-    const result = await clientSupabase.from("user_watchingEye").delete(user).eq("id", id).select()
+    const result = await clientSupabase.from("user_watchingEye").delete().eq("id", id).select()
     return result
 }
 
@@ -18,7 +17,6 @@ export async function getUser(id) {
     const result = await clientSupabase.from("user_watchingEye").select().eq("id", id)
     return result
 }
-
 
 export async function getallUser() {
     const result = await clientSupabase.from("user_watchingEye").select("*")

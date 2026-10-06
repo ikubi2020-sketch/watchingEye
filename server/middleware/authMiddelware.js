@@ -15,7 +15,7 @@ export async function newUserMiddleware(req, res , next) {
     const hashPassword = createHash(newUser.password)
     delete newUser.password
     newUser.passwordHash = hashPassword
-    req.body =  newUser
+    req.body = newUser
     next()
 }
 
@@ -29,5 +29,16 @@ export async function loginMiddleware(req, res , next) {
     const isAuthorize = comparePassword(loginPassword, userFromDb.passwordHash)
     // 401 for not unAuthorized
     if(!isAuthorize) { throw createError(401,  "user not authorized ")}
+    next()
+}
+
+export async function verifyAdminMiddleware(req, res , next) {
+    const adminAuth = req.headers.authorization
+    // 400 for bad request
+    if(!adminAuth) { throw createError(400,  "missing headers")}
+    const adminToken = adminAuth.split("Bearer ")[1]
+    const verifyAdmin = verifyToken(adminToken)
+    // 400 for bad request
+    if(!verifyAdmin){ throw createError(400, "missing headers")}
     next()
 }
