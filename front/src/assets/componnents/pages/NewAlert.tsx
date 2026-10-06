@@ -14,7 +14,7 @@ export default function NewAlert() {
     lat : ""
   }
   async function handelButton() {
-    const {data, error} = await globalAxios("post", "", {}, {},newAlert)
+    const {data, error} = await globalAxios("post", "", {}, {}, newAlert)
   if(error){console.log(error), alert(error)}
   else{
     navigate("/homepage")
