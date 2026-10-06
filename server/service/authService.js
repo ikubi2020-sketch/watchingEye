@@ -1,5 +1,5 @@
 import {addNewUser, deleteUser, getUser, getallUser} from "../dal/usersDbActions.js"
-import { createToken } from "../middleware/authTools.js"
+import { createToken} from "../middleware/authTools.js"
 import { createError } from "../utils/utils.js"
 
 export async function addNewUserServ(newUser) {

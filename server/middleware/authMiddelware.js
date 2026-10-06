@@ -32,7 +32,7 @@ export async function loginMiddleware(req, res , next) {
     next()
 }
 
-export function verifyAdminMiddleware(req, res , next) {
+export async function verifyAdminMiddleware(req, res , next) {
     const adminAuth = req.headers.authorization
     // 400 for bad request
     if(!adminAuth) { throw createError(400,  "missing headers")}
@@ -40,6 +40,8 @@ export function verifyAdminMiddleware(req, res , next) {
     const verifyAdmin = verifyToken(adminToken)
     // 400 for bad request
     if(!verifyAdmin){ throw createError(400, "missing headers")}
+    const {data, error} = await getUser(verifyAdmin.id)
+    if(data[0].role !== "admin") {throw createError(401, "user not authorized") }
     next()
 }
 
@@ -54,3 +56,17 @@ export function validUser() {
     req.body = verifyUser
     next()
 }
+
+
+export function User() {
+    const userAuth = req.headers.authorization
+    // 400 for bad request
+    if(!userAuth) { throw createError(400,  "missing headers")}
+    const userToken = userAuth.split("Bearer ")[1]
+    const verifyUser = verifyToken(userToken)
+    if(!verifyUser){ throw createError(400, "missing headers")}
+    console.log(verifyUser)
+    req.body = verifyUser
+    next()
+}
+

@@ -51,6 +51,13 @@ export function zodValidation(schema) {
 
 export const loginSchema = zod.object({
     "id" :  zod.coerce.number({message : "id must be number"}).min(1, "id can not get less then 1"),
-    "password" :  zod.coerce.number({message : "password must be number"}).min(1, "can not get an empty string")
+    "password" :  zod.coerce.number({message : "password must be number"}).min(1, "can not get an empty number")
 })
 
+export const newUserSchema = zod.object({
+    "username" : zod.string({message : "username must be a string"}).min(1, "can not get an empty string"),
+    "password" :  zod.coerce.number({message : "password must be number"}).min(1, "can not get an empty number"),
+    "email" : zod.string({message : "email must be a string"}).min(1, "can not get an empty string"),
+    "role" : zod.enum(["admin", "arena_user", "general_user"], "user role not valid"),
+    "assignedArena" : zod.enum(["north", "south", "center", "all"], "user assignedArena name not valid")
+})

@@ -1,14 +1,15 @@
 import express from "express"
 import {addNewUserCtrl, deleteUserCtrl, getAllUsersCtrl, getCurrentUserCtrl, loginCtrl, createadminCtrl} from "../ctrl/authCtrl.js"
 import {newUserMiddleware, loginMiddleware, verifyAdminMiddleware} from "../middleware/authMiddelware.js"
+import {zodValidation, loginSchema, newUserSchema} from "../middleware/middleare.js"
 
 const router = express.Router()
 
 router.post("/createadmin" , createadminCtrl)
 
-router.post("/register" ,newUserMiddleware, addNewUserCtrl)
+router.post("/register",zodValidation(newUserSchema) ,newUserMiddleware, addNewUserCtrl)
 
-router.post("/login" ,loginMiddleware, loginCtrl)
+router.post("/login", zodValidation(loginSchema) ,loginMiddleware, loginCtrl)
 
 router.get("/me" , getCurrentUserCtrl)
 

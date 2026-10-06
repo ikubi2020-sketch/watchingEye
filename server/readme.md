@@ -1,5 +1,4 @@
 
-to get the program run git clone """
 
 to run the program 
 
