@@ -14,7 +14,10 @@ the system need to get an alert and put it in the DB and to giv it back to autho
 and also to delete or edit an alert
 it manege their location and level of criticality and more 
 
-I chose "mongoDb" to use for the use of lists ond more complect data structure which is possible in sql but not so good to manage and efficient 
+
+both db's can be boused in this case for  both users and alerts 
+I chose "mongoDb" to use for the use of lists ond more complect data structure which is possible in sql but not so good to manage and efficient so in alert that can be more complect I used mongo 
+in users which is more row data I boused supabase and a unique id verified
 
 the system backend is build in five layers
 

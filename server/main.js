@@ -1,7 +1,8 @@
 import express from "express"
 import dotenv from "dotenv/config"
 import helmet from "helmet"
-import router from "./routes/routes.js"
+import routerAlerts from "./routes/routes.js"
+import authRouter from "./routes/authROutes.js"
 import cors from "cors"
 import  {loggerServer, errorHandler} from "./utils/utils.js"
 
@@ -17,7 +18,9 @@ app.use(helmet())
 
 app.use(cors({}))
 
-app.use("/api", router)
+app.use("/api/auth", authRouter)
+
+app.use("/api/alerts", routerAlerts)
 
 app.use(errorHandler)
 

@@ -5,15 +5,15 @@ import {alertScheme, zodValidation ,validEdit} from "../middleware/middleare.js"
 const router = express.Router()
 
 
-router.get("/alerts", getAllAlertsCtrl)
+router.get("/", getAllAlertsCtrl)
 
-router.get("/alerts/:id", getAlarmByIdCtrl)
+router.get("/:id", getAlarmByIdCtrl)
 
-router.post("/alerts",zodValidation(alertScheme), addAlarmCtrl)
+router.post("/",zodValidation(alertScheme), addAlarmCtrl)
 
-router.delete("/alerts/:id", DeleteAlarmCtrl)
+router.delete("/:id", DeleteAlarmCtrl)
 
-router.put("/alerts/:id",validEdit,  editAlarmCtrl)
+router.put("/:id",validEdit,  editAlarmCtrl)
 
 
 export default router
