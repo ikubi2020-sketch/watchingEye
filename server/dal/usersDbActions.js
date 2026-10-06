@@ -1,5 +1,5 @@
 
-import { clientSupabase } from "./sopaBaseConnection"
+import { clientSupabase } from "./supaBaseConnection.js"
 
 const dbName = "user_watchingEye"
 

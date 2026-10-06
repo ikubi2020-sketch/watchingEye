@@ -1,7 +1,7 @@
+import {getAllUsersServ, addNewUserServ} from "../service/authService.js"
 
 
-
-async function addNewUserCtrl(req, res, next) {
+export async function addNewUserCtrl(req, res, next) {
     const newUser = req.body
     try {
         const result = await addNewUserServ(newUser)
@@ -11,7 +11,7 @@ async function addNewUserCtrl(req, res, next) {
     }
 }
 
-async function deleteUserCtrl(req, res, next) {
+export async function deleteUserCtrl(req, res, next) {
     try {
         const result = await addNewUserServ()
         return res.status(201).json({message : result})
@@ -20,7 +20,7 @@ async function deleteUserCtrl(req, res, next) {
     }
 }
 
-async function getCurrentUserCtrl(req, res, next) {
+export async function getCurrentUserCtrl(req, res, next) {
     try {
         const result = await addNewUserServ()
         return res.status(201).json({message : result})
@@ -29,16 +29,16 @@ async function getCurrentUserCtrl(req, res, next) {
     }
 }
 
-async function getAllUsersCtrl(req, res, next) {
+export async function getAllUsersCtrl(req, res, next) {
     try {
-        const result = await addNewUserServ()
+        const result = await getAllUsersServ()
         return res.status(201).json({message : result})
     } catch (error) {
         next(error)
     }
 }
 
-async function loginCtrl(req, res, next) {
+export async function loginCtrl(req, res, next) {
     try {
         const result = await addNewUserServ()
         return res.status(201).json({message : result})
