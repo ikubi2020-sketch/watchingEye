@@ -18,3 +18,4 @@ router.get("/users" ,generaValidUser, getAllUsersCtrl)
 router.delete("/users/:id" ,verifyAdminMiddleware, deleteUserCtrl)
 
 export default router
+

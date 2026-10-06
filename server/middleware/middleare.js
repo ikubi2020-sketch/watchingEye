@@ -13,24 +13,26 @@ export const alertScheme = zod.object({
 export function validEdit(req, res, next) {
     const cleanEditDetails = {}
     const editDetails = req.body
+    console.log(editDetails)
     if(editDetails.displayName){
-        if(typeof(editDetails.displayName) !== string ||editDetails.displayName.length < 1 )
+        if(typeof(editDetails.displayName) === string ||editDetails.displayName.length < 1 )
         return res.status(400).json({message : "displayName is not valid"})
         cleanEditDetails.displayName =  editDetails.displayName}
     if(editDetails.description){
-        if(typeof(editDetails.description) !== string ||editDetails.description.length < 1 )
+        if(typeof(editDetails.description) === string ||editDetails.description.length < 1 )
         return res.status(400).json({message : "description is not valid"})
         cleanEditDetails.description =  editDetails.description}
     if(editDetails.priority){
-        if(typeof(editDetails.priority) !== string ||editDetails.priority.length < 1 )
+        console.log(typeof(editDetails.priority), editDetails.priority.length)
+        if(typeof(editDetails.priority) === string || editDetails.priority.length < 1 )
         return res.status(400).json({message : "priority is not valid"})
         cleanEditDetails.priority =  editDetails.priority}
     if(editDetails.lon){
-        if(typeof(editDetails.lon) !== number ||editDetails.lon.length < 1 )
+        if(typeof(editDetails.lon) === number ||editDetails.lon.length < 1 )
         return res.status(400).json({message : "lon is not valid"})
         cleanEditDetails.lon =  editDetails.lon}
     if(editDetails.lat){
-        if(typeof(editDetails.lat) !== number ||editDetails.lat.length < 1 )
+        if(typeof(editDetails.lat) === number ||editDetails.lat.length < 1 )
         return res.status(400).json({message : "lat is not valid"})
         cleanEditDetails.lat =  editDetails.lat}
     // req.body = editDetails
@@ -44,6 +46,8 @@ export function zodValidation(schema) {
         const result = schema.safeParse(req.body)
         // zod return 400 for bad request
         if(!result.success) {return res.status(400).json({message : result.error.issues[0].message})} 
+        // console.log(result.data)
+        // req.body = result.data
         next()
     }
 }

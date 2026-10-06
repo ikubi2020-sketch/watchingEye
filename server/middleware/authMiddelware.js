@@ -25,7 +25,8 @@ export async function loginMiddleware(req, res , next) {
     const loginUser = req.body
     const {data, error} = await  getUser(loginUser.id)
     //404 for not found
-    if(!data) { throw createError(404,  "user not found")}
+    console.log(data)
+    if(data.length === 0) { throw createError(404,  "user not found")}
     const userFromDb = data[0]
     const loginPassword = String(loginUser.password)
     const isAuthorize = comparePassword(loginPassword, userFromDb.passwordHash)
@@ -43,12 +44,14 @@ export async function verifyAdminMiddleware(req, res , next) {
     // 400 for bad request
     if(!verifyAdmin){ throw createError(400, "missing headers")}
     const {data, error} = await getUser(verifyAdmin.id)
+     // 404 for not found user
+    if(!data) { throw createError(404, "user not found")}
     // 401 for unauthorize user
     if(data[0].role !== "admin") {throw createError(401, "user not authorized") }
     next()
 }
 
-export function validUser() {
+export function validUser(req, res , next) {
     const userAuth = req.headers.authorization
     // 400 for bad request
     if(!userAuth) { throw createError(400,  "missing headers")}
@@ -61,7 +64,7 @@ export function validUser() {
 }
 
 
-export async function generaValidUser() {
+export async function generaValidUser(req, res , next) {
     const userAuth = req.headers.authorization
     // 400 for bad request
     if(!userAuth) { throw createError(400,  "missing headers")}
@@ -71,16 +74,20 @@ export async function generaValidUser() {
     if(!verifyUser){ throw createError(400, "missing headers")}
     console.log(verifyUser)
     const {data, error} = await getUser(verifyUser.id)
+    // 404 for not found user
+    if(data.length === 0) { throw createError(404, "user not found")}
     // 401 for unauthorize user
+    console.log(data ,data[0].role)
     if(data[0].role === "arena_user") {throw createError(401, "user not authorized") }
     next()
 }
 
-export async function specificValidUser() {
+export async function specificValidUser(req, res , next) {
     const {id} = req.params
     // 400 for bad request
     if(!id) {throw createError(400,  "missing id params")}
     const specifiedEvent = await findByIdDal(id)
+    if(!specifiedEvent[0]) { throw createError(404, "alert not found")}
     const userAuth = req.headers.authorization
     // 400 for bad request
     if(!userAuth) { throw createError(400,  "missing headers")}
@@ -90,6 +97,8 @@ export async function specificValidUser() {
     if(!verifyUser){ throw createError(400, "missing headers")}
     console.log(verifyUser)
     const {data, error} = await getUser(verifyUser.id)
+     // 404 for not found user
+    if(data.length === 0) { throw createError(404, "user not found")}
     // 401 for unauthorize user
     console.log(data[0].role, specifiedEvent[0].arena, data[0].assignedArena)
     if(data[0].role === "arena_user" && specifiedEvent[0].arena !== data[0].assignedArena) {throw createError(401, "user not authorized") }
