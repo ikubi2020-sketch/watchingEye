@@ -25,7 +25,7 @@ export default function GetAlert() {
             <h3>to get one alert enter alert id here</h3>
             <input className="fieldGetForm"
             onChange={(e) => id = e.target.value}
-            type="text" placeholder="enter longitude"/>
+            type="text" placeholder="enter alert id"/>
             <button className="newButton" onClick={handelGetButton}>send details</button>
         </div>
         <div>

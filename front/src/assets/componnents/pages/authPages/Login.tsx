@@ -25,7 +25,7 @@ export default function Login() {
         <div>
             <input className="fieldDeleteForm" onChange={(e) => userDetails.password = e.target.value} type="text" placeholder="enter alert password" />
             <input className="fieldDeleteForm" onChange={(e) => userDetails.id = e.target.value} type="text" placeholder="enter alert id" />
-            <button className="deleteButton" onClick={handelButton}>delete</button>
+            <button className="submitButton" onClick={handelButton}>delete</button>
         </div>
     </div>
   )
