@@ -17,7 +17,7 @@ export function createToken(payload) {
 }
 
 export function verifyToken(token) {
-    const payLoad = jwt.sign(token , process.env.TOKEN_KEY)
+    const payLoad = jwt.verify(token , process.env.TOKEN_KEY)
     return payLoad
 }
 

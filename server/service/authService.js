@@ -1,9 +1,15 @@
 import {addNewUser, deleteUser, getUser, getallUser} from "../dal/usersDbActions.js"
+import { createToken } from "../middleware/authTools.js"
+import { createError } from "../utils/utils.js"
 
 export async function addNewUserServ(newUser) {
+    console.log(newUser)
     try {
-        const result = await addNewUser(newUser)
-        return result
+        const {data, error} = await addNewUser(newUser)
+        // 404 for not found
+        if(!data) {throw createError(404, "user not found")}
+        console.log(data, error)
+        return data
     } catch (error) {
         throw error
     }
@@ -11,26 +17,28 @@ export async function addNewUserServ(newUser) {
 
 export async function getAllUsersServ(data) {
     try {
-        const result = await {}
-        return result
+        const  {data, error}  = await getallUser()
+        // 404 for not found
+        if(!data) {throw createError(404, "users not found")}
+        return data
     } catch (error) {
         throw error
     }
 }
 
-export async function bServ(data) {
+export async function getCurrentUserServ(data) {
     try {
-        const result = await {}
-        return result
+        const  {data, error}  = await {}
+        return data
     } catch (error) {
         throw error
     }
 }
 
-export async function cServ(data) {
+export  function loginServ(userPayload) {
     try {
-        const result = await {}
-        return result
+        const  token  = createToken(userPayload)
+        return token
     } catch (error) {
         throw error
     }
